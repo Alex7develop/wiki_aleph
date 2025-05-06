@@ -32,3 +32,4 @@ coverage/
 
 # Mac
 .DS_Store
+src/config/aws.ts
