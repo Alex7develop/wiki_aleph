@@ -4,6 +4,7 @@ import { listObjects } from '../../services/s3Service';
 import type { FileItem } from '../../services/s3Service';
 import folderIcon from '../../assets/folder.svg';
 
+// Контейнер для списка файлов, с адаптивными паддингами и фоном
 const FileListContainer = styled.div`
     width: 100vw;
     padding: 48px 2vw 0 2vw;
@@ -16,6 +17,7 @@ const FileListContainer = styled.div`
     }
 `;
 
+// Заголовок раздела
 const Title = styled.h2`
     font-size: 1.6rem;
     font-weight: 700;
@@ -29,6 +31,7 @@ const Title = styled.h2`
     }
 `;
 
+// Сетка для карточек файлов
 const FileGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -41,6 +44,7 @@ const FileGrid = styled.div`
     }
 `;
 
+// Карточка файла
 const FileCard = styled.div`
     background: white;
     border-radius: 16px;
@@ -62,6 +66,7 @@ const FileCard = styled.div`
     }
 `;
 
+// Иконка папки
 const FolderIcon = styled.img`
     width: 32px;
     height: 32px;
@@ -74,6 +79,7 @@ const FolderIcon = styled.img`
     }
 `;
 
+// Название файла (с обрезкой длинных строк)
 const FileName = styled.div`
     font-size: 1.08rem;
     font-weight: 500;
@@ -88,6 +94,7 @@ const FileName = styled.div`
     }
 `;
 
+// Путь к файлу (с обрезкой длинных строк)
 const FilePath = styled.div`
     font-size: 0.92rem;
     color: #888;
@@ -102,6 +109,7 @@ const FilePath = styled.div`
     }
 `;
 
+// Ссылка на файл
 const FileLink = styled.a`
     margin-top: auto;
     color: #3cb371;
@@ -118,16 +126,24 @@ const FileLink = styled.a`
     }
 `;
 
+// Сообщение о загрузке
 const LoadingMessage = styled.div`
     text-align: center;
     padding: 2rem;
     color: #666;
 `;
 
+/**
+ * Компонент FileList
+ * Получает список файлов с backend и отображает их в виде карточек
+ */
 export const FileList = () => {
+    // Состояние для файлов
     const [files, setFiles] = useState<FileItem[]>([]);
+    // Состояние загрузки
     const [loading, setLoading] = useState(true);
 
+    // Получение файлов при монтировании компонента
     useEffect(() => {
         const fetchFiles = async () => {
             try {
@@ -152,9 +168,13 @@ export const FileList = () => {
             <FileGrid>
                 {files.map((file) => (
                     <FileCard key={file.url}>
+                        {/* Иконка папки */}
                         <FolderIcon src={folderIcon} alt="Папка" />
+                        {/* Название файла */}
                         <FileName title={file.name}>{file.name}</FileName>
+                        {/* Путь к файлу */}
                         <FilePath title={file.path}>{file.path}</FilePath>
+                        {/* Ссылка на файл */}
                         <FileLink href={file.url} target="_blank" rel="noopener noreferrer">
                             Открыть файл
                         </FileLink>
