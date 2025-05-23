@@ -27,7 +27,7 @@ function App() {
                 <MainContent>
                     <Routes>
                         <Route path="/" element={<FileList />} />
-                        <Route path="/files" element={<FileList />} />
+                        {/* <Route path="/files" element={<FileList />} /> */}
                         <Route path="/about" element={<div>О нас</div>} />
                     </Routes>
                 </MainContent>

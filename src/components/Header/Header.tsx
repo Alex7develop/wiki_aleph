@@ -142,7 +142,7 @@ export const Header = () => {
         {/* Навигация */}
         <Nav open={open}>
           <NavLink href="/">Главная</NavLink>
-          <NavLink href="/files">Файлы</NavLink>
+          {/* <NavLink href="/files">Файлы</NavLink> */}
           {/* <NavLink href="/about">О нас</NavLink> */}
         </Nav>
         {/* Кнопка бургер-меню */}

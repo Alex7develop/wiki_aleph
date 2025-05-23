@@ -47,7 +47,7 @@ const FileGrid = styled.div`
 // Карточка файла
 const FileCard = styled.div`
     background: white;
-    border-radius: 16px;
+    border-radius: 14px;
     padding: 1.1rem 1rem 1rem 1rem;
     box-shadow: 0 2px 8px rgba(60,179,113,0.07);
     display: flex;
@@ -60,6 +60,14 @@ const FileCard = styled.div`
         min-height: 80px;
         padding: 0.8rem 0.7rem 0.7rem 0.7rem;
         border-radius: 12px;
+        max-width: 48%;
+    }
+
+     @media (max-width: 375px) {
+        min-height: 70px;
+        padding: 0.7rem 0.6rem 0.6rem 0.6rem;
+        border-radius: 10px;
+        max-width: 37%;
     }
     &:hover {
         box-shadow: 0 4px 16px rgba(60,179,113,0.13);
@@ -119,7 +127,7 @@ const FileLink = styled.a`
     word-break: break-all;
     transition: color 0.2s;
     @media (max-width: 600px) {
-        font-size: 0.97rem;
+        font-size: 0.98rem;
     }
     &:hover {
         color: #267a4a;
