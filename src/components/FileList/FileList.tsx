@@ -1,8 +1,14 @@
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { listObjects } from '../../services/s3Service';
 import type { FileItem } from '../../services/s3Service';
 import folderIcon from '../../assets/folder.svg';
+
+// Анимация вращения для лоадера
+const spin = keyframes`
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+`;
 
 // Контейнер для списка файлов, с адаптивными паддингами и фоном
 const FileListContainer = styled.div`
@@ -134,11 +140,27 @@ const FileLink = styled.a`
     }
 `;
 
-// Сообщение о загрузке
+// Сообщение о загрузке с лоадером
 const LoadingMessage = styled.div`
     text-align: center;
     padding: 2rem;
-    color: #666;
+    color: #3cb371;
+    font-weight: 600;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+`;
+
+// Зеленый круглый лоадер
+const Loader = styled.div`
+    border: 4px solid #e0f5ea;
+    border-top: 4px solid #3cb371;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: ${spin} 1s linear infinite;
 `;
 
 /**
@@ -167,7 +189,12 @@ export const FileList = () => {
     }, []);
 
     if (loading) {
-        return <LoadingMessage>Загрузка файлов...</LoadingMessage>;
+        return (
+            <LoadingMessage>
+                <Loader />
+                Загрузка файлов...
+            </LoadingMessage>
+        );
     }
 
     return (
