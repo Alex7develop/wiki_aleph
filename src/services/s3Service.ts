@@ -17,9 +17,9 @@ export interface S3Object {
 
 // Тип одного файла из API
 export interface FileItem {
-    name: string; // Название файла
-    path: string; // Путь к файлу в хранилище
-    url: string;  // Прямая ссылка на файл
+  name: string; // Название файла
+  path: string; // Путь к файлу в хранилище
+  url: string; // Прямая ссылка на файл
 }
 
 /**
@@ -27,17 +27,17 @@ export interface FileItem {
  * @returns Promise<FileItem[]> — массив файлов
  */
 export const listObjects = async (): Promise<FileItem[]> => {
-    try {
-        // Запрос к backend API
-        const res = await fetch('https://backend.wiki.alephtrade.com/api/list');
-        const data = await res.json();
-        // Проверяем статус и наличие массива файлов
-        if (data.status && Array.isArray(data.files)) {
-            return data.files;
-        }
-        return [];
-    } catch (error) {
-        console.error('Ошибка при получении файлов:', error);
-        return [];
+  try {
+    // Запрос к backend API
+    const res = await fetch('https://api.alephtrade.com/backend_wiki/api/list');
+    const data = await res.json();
+    // Проверяем статус и наличие массива файлов
+    if (data.status && Array.isArray(data.files)) {
+      return data.files;
     }
+    return [];
+  } catch (error) {
+    console.error('Ошибка при получении файлов:', error);
+    return [];
+  }
 };
